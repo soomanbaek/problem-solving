@@ -14,13 +14,16 @@ string convertDecimalToBinary(long long number){
     return ret;
 }
 
-bool isHaveChildren(string& num, int idx, bool& isSuccess){
+bool isHaveChildren(string& num, int idx, int carry, bool& isSuccess){
     if(idx%2 == 0)   return num[idx] == '1';  // 리프 노드
-    bool children = isHaveChildren(num, idx-(idx+1)/2, isSuccess) || isHaveChildren(num, idx+(idx+1)/2, isSuccess);
-    if(num[idx]=='0' && children){
+    
+    bool children = false;
+    children |= isHaveChildren(num, idx-carry, carry/2, isSuccess);
+    children |= isHaveChildren(num, idx+carry, carry/2, isSuccess);
+    if(num[idx] == '0' && children){
         isSuccess = false;
     }
-    return num[idx] == '1';
+    return (children || num[idx] == '1');
 }
 
 bool isAllzero(string num){
@@ -54,10 +57,11 @@ int isPossibleToShowBinaryTree(long long number){
     }
     
     // 자식이 1인데 본인은 0인 경우 false
-    // bool isSuccess = true;
-    // isHaveChildren(num, num.length()/2, isSuccess);
+    bool isSuccess = true;
+    isHaveChildren(num, num.length()/2, (num.length()+1)/4,isSuccess);
     
-    return isSuccess(num);
+    return isSuccess;
+    // return isSuccess(num);
 }
 
 vector<int> solution(vector<long long> numbers) {
