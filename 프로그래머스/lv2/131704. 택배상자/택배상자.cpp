@@ -22,10 +22,11 @@ int solution(vector<int> order) {
             continue;
         }
         if(!Q.empty()){
-            if(order[n] > Q.front()){
+            while(order[n] > Q.front()){
                 S.push(Q.front());
                 Q.pop();
-            }else if(order[n] == Q.front()){
+            }
+            if(order[n] == Q.front()){
                 Q.pop();
                 n += 1;
                 answer += 1;
