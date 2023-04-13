@@ -5,11 +5,6 @@
 using namespace std;
 
 int N, M;
-
-// d, l, r, u
-int dr[4] = {1, 0, 0, -1};
-int dc[4] = {0, -1, 1, 0};
-
 int dir[4];
 
 void setDirectionNum(int y, int x, int r, int c){
@@ -18,7 +13,7 @@ void setDirectionNum(int y, int x, int r, int c){
     dir[2] = c-1;
     dir[3] = N-r;
 }
-    
+
 string solution(int n, int m, int y, int x, int r, int c, int k) {
     N = n; M = m;
     string answer = "";
@@ -60,6 +55,8 @@ string solution(int n, int m, int y, int x, int r, int c, int k) {
         for(int i=0; i<dir[2]; ++i) route += 'r';
         for(int i=0; i<dir[3]; ++i) route += 'u';
     }
+    
     answer = route;
+    
     return answer;
 }
