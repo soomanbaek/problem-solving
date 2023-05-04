@@ -7,12 +7,7 @@ class Solution {
 
         for(int i=0; i<s.length(); ++i){
             char c = s.charAt(i);
-            if(!hm.containsKey(c)){
-                answer.add(-1);
-                hm.put(c, i);
-                continue;
-            }
-            answer.add(i - hm.get(c));
+            answer.add(i - hm.getOrDefault(c, i+1));
             hm.put(c, i);
         }
         return answer;
