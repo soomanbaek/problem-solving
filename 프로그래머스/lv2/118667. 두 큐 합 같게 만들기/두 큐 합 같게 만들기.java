@@ -21,8 +21,8 @@ class Solution {
         
         if(total % 2 == 1)  return -1;
         
-        int answer = 0;
-        while(sum1 != sum2 && answer <= N*2){
+        int answer = 0; 
+        while(sum1 != sum2 && answer <= 2*N){
             if(sum1 > total/2){
                 int val = q1.poll();
                 sum1 -= val;
@@ -36,7 +36,7 @@ class Solution {
             }
             answer += 1;
         }
-        if(answer > N*2) answer = -1;
+        if(answer > 2*N) answer = -1;
         
         return answer;
     }
