@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include <vector>
 #include <map>
@@ -6,32 +5,26 @@
 using namespace std;
 
 vector<string> solution(vector<string> players, vector<string> callings) {
-    int N = players.size();
-    int M = callings.size();
     vector<string> answer;
-    map<string, int> name_rank;
-    map<int, string> rank_name;
-    
-    for(int i=0; i<N; ++i){
-        name_rank.insert({players[i], i+1});
-        rank_name.insert({i+1, players[i]});
+    // 1. mapping [name - index]
+    map<string, int> M;
+    for(int i=0; i<players.size(); ++i){
+        M[players[i]] = i; // name(string) - index(int) 매핑
     }
-    for(auto& calling: callings){
-        // 앞사람이 뒤로 밀려남
-        string front_name = rank_name[name_rank[calling]-1];
-        int front_rank = name_rank[calling];
+    // 2. callings 순회
+    for(auto& player : callings){
+        int index = M[player];
+        string front_player = players[index-1];
+        M[player] -= 1;
+        M[front_player] += 1;
         
-        // 앞으로 전진
-        rank_name[name_rank[calling] - 1] = calling;
-        name_rank[calling] -= 1;
-        
-        rank_name[front_rank] = front_name;
-        name_rank[front_name] = front_rank;
+        string temp = players[index];
+        players[index] = players[index-1];
+        players[index-1] = temp;
     }
     
-    for(auto rn : rank_name){
-        answer.push_back(rn.second);
-    }
+    // 3. answer = players
+    answer = players;
     
     return answer;
 }
