@@ -5,7 +5,7 @@
 using namespace std;
 
 class Number{
-public:
+public: 
     int num;
     int idx;
     Number(int n, int i){
