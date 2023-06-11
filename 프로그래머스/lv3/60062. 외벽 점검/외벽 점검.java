@@ -10,7 +10,7 @@ class Solution {
         // 점검 돌기
         for(int i=node; i<weak.length; ++i){
             if(end < weak[i]) break;
-            if((checked & (1<<i)) == 1) break;
+            if((checked & (1<<i)) > 0) break;
             checked |= (1<<i);
         }
         // 친구의 점검 거리가 한바퀴를 전부 돌 경우
@@ -18,7 +18,7 @@ class Solution {
             end = end % n;
             for(int i=0; i<weak.length; ++i){
                 if(end < weak[i]) break;
-                if((checked & (1<<i)) == 1) break;
+                if((checked & (1<<i)) > 0) break;
                 checked |= (1<<i);
             }
         }
@@ -34,7 +34,7 @@ class Solution {
         }
         // 3. 친구들을 모두 투입했는데 취약 지점 점검하지 못하는 경우
         if(num+1 == dist.length){
-            return -1;
+            return 10;
         }
         // 4. 다른 친구 투입
         int ret = 10;
@@ -42,9 +42,7 @@ class Solution {
             if((checked & (1<<i)) != 0){
                 continue;
             }
-     
-            int friendNum = explore(i, checked, num+1);
-            if(friendNum != -1) ret = Math.min(ret, friendNum);
+            ret = Math.min(ret, explore(i, checked, num+1));
         }
         
         return ret;
@@ -61,8 +59,7 @@ class Solution {
             .mapToInt(Integer::intValue).toArray();
         
         for(int i=0; i<weak.length; ++i){
-            int friendNum = explore(i, 0, 0);
-            if(friendNum != 10)   answer = Math.min(answer, explore(i, 0, 0));
+						answer = Math.min(answer, explore(i, 0, 0));
         }
         if(answer == 10)    answer = -1;
         
