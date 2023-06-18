@@ -7,13 +7,8 @@ class Solution {
         int answer = 0;
         Arrays.sort(score, Collections.reverseOrder());
 
-        int num = 0;
-        for(int s: score){
-            num += 1;
-            if(num == m){
-                answer += s * m;
-                num = 0;
-            }
+        for(int i=m-1; i<score.length; i+=m){
+            answer += score[i] * m;
         }
         return answer;
     }
