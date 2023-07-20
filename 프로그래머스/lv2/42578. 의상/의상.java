@@ -9,13 +9,13 @@ class Solution {
         
         for(String[] cloth: clothes){
             String category = cloth[1];
-            map.put(category, map.getOrDefault(category, 0)+1);
+            map.put(category, map.getOrDefault(category, 1)+1);
         }
         
         Set<String> categories = map.keySet();
         Iterator<String> iter = categories.iterator();
         while(iter.hasNext()){
-            answer *= (map.get(iter.next()) + 1);
+            answer *= (map.get(iter.next()));
         }
         
         
