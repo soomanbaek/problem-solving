@@ -9,7 +9,6 @@ class Main{
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    Map<Integer, Integer> startIdx = new HashMap<>();
     Map<Integer, Integer> endIdx = new HashMap<>();
 
     int n = Integer.parseInt(br.readLine());
@@ -21,13 +20,10 @@ class Main{
     int[] sortedArr = Arrays.stream(arr).sorted().toArray();
 
     int prev = sortedArr[0];
-
-    startIdx.put(prev, 0);
-    for(int i=1; i<n; ++i){
-      int cur = sortedArr[i];
+    for(int idx=1; idx<n; ++idx){
+      int cur = sortedArr[idx];
       if(prev != cur) {
-        endIdx.put(prev, i-1);
-        startIdx.put(cur, i);
+        endIdx.put(prev, idx-1);
         prev = cur;
       }
     }
