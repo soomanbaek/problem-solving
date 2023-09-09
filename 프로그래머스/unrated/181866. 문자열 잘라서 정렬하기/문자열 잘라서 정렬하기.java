@@ -3,14 +3,10 @@ import java.util.stream.*;
 
 class Solution {
     public String[] solution(String myString) {
-        String[] answer = myString.split("x");
-        Arrays.sort(answer, new Comparator<String>(){
-            @Override
-            public int compare(String a, String b){
-                return a.compareTo(b);
-            }
-        });
-        answer = Arrays.stream(answer).filter(s -> s.length() != 0).toArray(String[]::new);
+        String[] answer = Arrays.stream(myString.split("x"))
+            .filter(s -> s.length() != 0)
+            .sorted()
+            .toArray(String[]::new);
         return answer;
     }
 }
